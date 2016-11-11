@@ -1,14 +1,17 @@
 import React from 'react'
 import Head from 'next/head'
 import axios from 'axios'
+import DeployForm from '../components/DeployForm'
 
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+
+    const {query} = props.url
 
     this.state = {
-      deployedUrl: null
-    };
+      deployedUrl: null,
+    }
   }
 
   static async getInitialProps() {
@@ -17,24 +20,19 @@ export default class extends React.Component {
     }
   }
 
-  deploy = async () => {
-    let { value: token } = this.refs.zeitToken;
+  deploy = async ({repo, zeitToken, envs}) => {
+    const { deployService, url } = this.props
 
-    if (!token || token.length !== 24) return false;
+    repo = url.query.repo || repo
 
-    const { url, deployService } = this.props;
-    const { query: { repo } } = url;
-
-    const deploy = await axios.post(deployService, {repo, token});
-
-    this.refs.zeitToken.value = null;
+    const deploy = await axios.post(deployService, {repo, zeitToken, envs})
 
     this.setState({deployedUrl: deploy.data.url});
   }
 
   render() {
-    const { query: { repo } } = this.props.url;
-    const { deployedUrl } = this.state;
+    const { query } = this.props.url
+    const { deployedUrl } = this.state
 
     return (
       <div>
@@ -47,11 +45,9 @@ export default class extends React.Component {
             <p>Your deployment has been queued!</p>
             <p>Your app will be available at <a href={deployedUrl}>{deployedUrl}</a></p>
           </div>
-        : <div>
-            <p>Please enter your Zeit <a href="https://zeit.co/account#api-tokens">API token</a>:</p>
-            <input type="text" ref="zeitToken" placeholder="Paste token here" maxLength="24" />
-            <button onClick={this.deploy}>Deploy!</button>
-          </div>
+        : <DeployForm initialEnvs={query.env}
+            needRepo={!query.repo}
+            onSubmit={this.deploy} />
         }
       </div>
     )
