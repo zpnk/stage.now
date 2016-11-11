@@ -1,4 +1,5 @@
 import React from 'react'
+import isRepoUrl from '../lib/is-repo-url'
 
 export default class DeployForm extends React.Component {
   constructor(props) {
@@ -53,7 +54,13 @@ export default class DeployForm extends React.Component {
 
   submit = () => {
     const form = this.state
+    const {needRepo} = this.props
     let _errors = {}
+
+    if (needRepo && !isRepoUrl(form.repo)) {
+      _errors.repo = `Please enter a valid GitHub repo url in the format:
+        https://github.com/{owner}/{repo}`
+    }
 
     if (!form.zeitToken || form.zeitToken.length < 24) {
       _errors.zeitToken = 'Please enter a valid token'
