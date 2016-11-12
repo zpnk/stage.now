@@ -2,7 +2,7 @@ import React from 'react'
 import {style} from 'next/css'
 
 export default () => (
-  <div className={styles.footer}>
+  <footer className={styles.footer}>
     <span>
       built by <a href="https://github.com/amccloud">@amccloud</a>
       {' '}&{' '}
@@ -11,7 +11,7 @@ export default () => (
     <span>
       <a href="https://github.com/zpnk/stage.sh">source</a>
     </span>
-  </div>
+  </footer>
 )
 
 const styles = {

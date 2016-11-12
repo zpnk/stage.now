@@ -3,12 +3,12 @@ import Head from 'next/head'
 import {style, insertRule} from 'next/css'
 
 export default ({title}) => (
-  <div>
+  <header>
     <Head>
       <title>{title}</title>
     </Head>
     <h1 className={styles.h1}># STAGE</h1>
-  </div>
+  </header>
 )
 
 insertRule(`

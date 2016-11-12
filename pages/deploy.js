@@ -4,7 +4,7 @@ import axios from 'axios'
 import isRepoUrl from '../lib/is-repo-url'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import DeployForm from '../components/DeployForm'
+import Form from '../components/Form'
 
 export default class extends React.Component {
   constructor(props) {
@@ -54,38 +54,40 @@ export default class extends React.Component {
     return (
       <main>
         <Header title='Deploy to now' />
-        <div className={styles.container}>
-          <h2 className={styles.title}>
-            ## Deploy to <a href="https://now.sh">now</a>
-          </h2>
 
-          <div className={styles.message}>
-            { query.repo && !_errors.repo ?
-              <span>
-                Deploying <a href={query.repo}>{query.repo.split('.com/')[1]}</a>
-              </span>
-            : null
-            }
-            { deploying ? 'Initialising...' : _errors.repo}
+        <h2 className={styles.title}>
+          ## Deploy to <a href="https://now.sh">now</a>
+        </h2>
+
+        { query.repo && !_errors.repo ?
+          <p>
+            Deploying <a href={query.repo}>{query.repo.split('.com/')[1]}</a>
+          </p>
+        : null
+        }
+
+        { deploying ?
+          <p>Initialising...</p>
+        : <p>{_errors.repo}</p>
+        }
+
+        { deployedUrl ?
+          <div>
+            <p>Your deployment has been queued!</p>
+            <p>
+              Your app will be available at
+              {' '}<a href={deployedUrl}>{deployedUrl}</a>
+            </p>
           </div>
+        : null
+        }
 
-          { deployedUrl ?
-            <div>
-              <p>Your deployment has been queued!</p>
-              <p>
-                Your app will be available at
-                {' '}<a href={deployedUrl}>{deployedUrl}</a>
-              </p>
-            </div>
-          : null }
-
-          { !deployedUrl && !deploying ?
-            <DeployForm initialEnvs={query.env}
-              needRepo={!query.repo || _errors.repo}
-              onSubmit={this.deploy} />
-          : null
-          }
-        </div>
+        { !deployedUrl && !deploying ?
+          <Form initialEnvs={query.env}
+            needRepo={!query.repo || _errors.repo}
+            onSubmit={this.deploy} />
+        : null
+        }
 
         <Footer />
       </main>
@@ -97,8 +99,5 @@ const styles = {
   title: style({
     fontSize: '12px',
     fontWeight: 700,
-  }),
-  message: style({
-    margin: '20px 0'
   })
 }
