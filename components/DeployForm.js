@@ -117,7 +117,7 @@ export default class DeployForm extends React.Component {
           </div>
           : null
         }
-        
+
         <div>
           <div className={styles.field(err.zeitToken)}>
             <label htmlFor='zeitToken' className={styles.label(err.zeitToken)}>
@@ -213,6 +213,8 @@ const styles = {
   }),
   envKey: (error) => style({
     color: error ? '#f00' : '#dbcb00',
+    fontSize: '11px',
+    fontWeight: 700,
     width: '100px',
     '::-webkit-input-placeholder': {
       color: error ? '#f00' : '#dbcb00'
