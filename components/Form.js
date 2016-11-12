@@ -3,7 +3,7 @@ import {style, merge} from 'next/css'
 import TextFieldset from '../components/TextFieldset'
 import EnvFieldset from '../components/EnvFieldset'
 import Button from '../components/Button'
-import isRepoUrl from '../lib/is-repo-url'
+import validate from '../lib/validate'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -59,27 +59,10 @@ export default class Form extends React.Component {
   submit = () => {
     const form = this.state
     const {needRepo} = this.props
-    let _errors = {}
 
-    if (needRepo && !isRepoUrl(form.repo)) {
-      _errors.repo = 'Please enter a valid GitHub repo url'
-    }
+    const _errors = validate.form(form)
 
-    if (!form.zeitToken || form.zeitToken.length < 24) {
-      _errors.zeitToken = 'Please enter a valid token'
-    }
-
-    form.envs.forEach((env, idx) => {
-      if (!env.value) {
-        _errors['env'+idx] = 'Please enter a value, or remove this envar'
-      }
-      if (!env.key) {
-        _errors['env'+idx] = 'Please enter a key, or remove this envar'
-      }
-      if (/[^A-z0-9_]/i.test(env.key)) {
-        _errors['env'+idx] = 'Key may only contain letters, numbers, and underscores'
-      }
-    })
+    if (!needRepo) delete _errors.repo
 
     this.setState({_errors})
 
@@ -103,7 +86,7 @@ export default class Form extends React.Component {
             onChange={onChange}
             error={err.repo}
             hint='URL to a GitHub repo' />
-          : null
+        : null
         }
 
         <TextFieldset name='zeitToken'

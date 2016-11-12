@@ -1,10 +1,10 @@
 import React from 'react'
 import {style, insertRule} from 'next/css'
 import axios from 'axios'
-import isRepoUrl from '../lib/is-repo-url'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Form from '../components/Form'
+import {isRepoUrl} from '../lib/validate'
 
 export default class extends React.Component {
   constructor(props) {
