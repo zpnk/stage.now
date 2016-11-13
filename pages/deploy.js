@@ -39,12 +39,21 @@ export default class extends React.Component {
     const { deployService, url: {query} } = this.props
 
     if (isRepoUrl(query.repo)) {
-      repo = url.query.repo
+      repo = query.repo
     }
 
-    const deploy = await axios.post(deployService, {repo, zeitToken, envs})
+    try {
+      const deploy = await axios.post(deployService, {repo, zeitToken, envs})
 
-    this.setState({deployedUrl: deploy.data.url, deploying: false})
+      this.setState({deployedUrl: deploy.data.url, deploying: false})
+    } catch(error) {
+      this.setState({
+        _errors: {
+          deploy: 'Deploy failed, please check the repo and try again.'
+        },
+        deploying: false
+      })
+    }
   }
 
   render() {
@@ -68,7 +77,7 @@ export default class extends React.Component {
 
         { deploying ?
           <p>Initialising...</p>
-        : <p>{_errors.repo}</p>
+        : <p>{_errors.deploy || _errors.repo}</p>
         }
 
         { deployedUrl ?
