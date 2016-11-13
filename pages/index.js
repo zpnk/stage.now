@@ -52,8 +52,7 @@ export default () => (
     <p>Required environment variables can be specificed in the url:</p>
     <p>
       <code className={styles.code}>
-        https://stage.sh/deploy?repo=https://github.com/zpnk/hello-world
-        &env=GREETING&env=PORT
+        https://stage.sh/deploy?repo=https://github.com/zpnk/hello-world&env=GREETING&env=PORT
       </code>
     </p>
 
