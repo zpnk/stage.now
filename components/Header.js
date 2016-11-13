@@ -6,6 +6,7 @@ export default ({title}) => (
   <header>
     <Head>
       <title>{title}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
     <h1 className={styles.h1}># STAGE</h1>
   </header>
@@ -57,6 +58,7 @@ insertRule(`
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    padding: 0 15px;
   }
 `)
 

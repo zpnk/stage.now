@@ -94,6 +94,7 @@ const styles = {
     transition: 'all .2s ease',
     ':hover': {
       background: '#000',
+      border: '2px solid #000',
       color: '#fff'
     }
   }),

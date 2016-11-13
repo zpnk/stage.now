@@ -50,7 +50,6 @@ const styles = {
     display: 'inline-block'
   }),
   btn: style({
-    position: 'absolute !important',
     display: 'inline !important',
     padding: '5px 10px !important',
     margin: '5px 0 0 10px !important'

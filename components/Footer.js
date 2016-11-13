@@ -18,6 +18,7 @@ const styles = {
   footer: style({
     marginTop: 'auto',
     marginBottom: '40px',
+    paddingTop: '40px',
     display: 'flex',
     justifyContent: 'space-between',
     color: '#666',
