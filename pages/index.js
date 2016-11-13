@@ -2,8 +2,12 @@ import React from 'react';
 import {style} from 'next/css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Hero from '../components/Hero'
 
 const styles = {
+  heroContainer: style({
+    padding: '100px 0px'
+  }),
   h2: style({
     fontSize: '12px',
     fontWeight: 700,
@@ -44,8 +48,10 @@ const styles = {
 
 export default () => (
   <main>
+    <div className={styles.heroContainer}>
+      <Hero />
+    </div>
     <Header title="STAGE" />
-
     <p className={styles.tagline}>
       &gt; staging environments made <b>simple</b> and <b>realtime</b>.
     </p>
