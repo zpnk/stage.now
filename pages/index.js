@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 export default () => (
   <main>
     <Header title='STAGE' />
+    
     <p className={styles.tagline}>
       > staging environments made <b>simple</b> and <b>realtime</b>.
     </p>
@@ -32,30 +33,6 @@ export default () => (
       <button className={styles.btn}>Start staging now</button>
     </div>
 
-    <h2 className={styles.h2} id='deploy-button'>
-      <a href="#deploy-button" className={styles.inverted}>## Deploy Button</a>
-    </h2>
-    <p>
-      Deploy to <b><a href="https://now.sh">now</a></b> with a single click.
-    </p>
-    <p>Link to any GitHub repo with a package.json or Dockerfile.</p>
-    <p>
-      Try it out by deploying{' '}
-      <b><a href="https://github.com/zeit/nextgram">zeit/nextgram</a></b>:
-    </p>
-    <div className={styles.center}>
-      <a href="https://stage.sh/deploy?repo=https://github.com/zeit/nextgram"
-        className={styles.btn}>
-        Deploy to now
-      </a>
-    </div>
-    <p>Required environment variables can be specificed in the url:</p>
-    <p>
-      <code className={styles.code}>
-        https://stage.sh/deploy?repo=https://github.com/zpnk/hello-world&env=GREETING&env=PORT
-      </code>
-    </p>
-
     <Footer />
   </main>
 )
@@ -65,12 +42,6 @@ const styles = {
     fontSize: '12px',
     fontWeight: 700,
     marginTop: '50px'
-  }),
-  code: style({
-    backgroundColor: 'rgba(0,0,0,0.04)',
-    padding: '3px',
-    fontFamily: 'Menlo, Courier, monospace',
-    fontSize: '95%'
   }),
   center: style({
     textAlign: 'center'
@@ -95,12 +66,6 @@ const styles = {
       background: '#000',
       border: '2px solid #000',
       color: '#fff'
-    }
-  }),
-  inverted: style({
-    border: 'none',
-    ':hover': {
-      borderBottom: '1px solid #424242'
     }
   }),
   tagline: style({
