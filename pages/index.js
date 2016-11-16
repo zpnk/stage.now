@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 export default () => (
   <main>
     <Header title='STAGE' />
-    
+
     <p className={styles.tagline}>
       > staging environments made <b>simple</b> and <b>realtime</b>.
     </p>
@@ -18,7 +18,6 @@ export default () => (
       By harnessing the power of <b><a href="https://now.sh">now</a></b>,
       deployments are <b>fast</b> and <b>reliable</b>.
     </p>
-
     <h2 className={styles.h2}>## Instant environments for every PR </h2>
     <p>
       Open a <b><a href="https://github.com">GitHub</a></b> PR and
@@ -29,10 +28,34 @@ export default () => (
       With full <b><a href="https://docker.com">Docker</a></b> support,
       staging environments mirror production perfectly.
     </p>
-    <div className={styles.center}>
-      <button className={styles.btn}>Start staging now</button>
-    </div>
 
+    <h2 className={styles.h2}>## Start staging now</h2>
+    <p>Follow these steps to setup <b>stage</b> for your repo:</p>
+
+    <ol className={styles.ol}>
+      <li>
+        Create a new <a href="https://github.com/settings/tokens/new">GitHub access token</a>
+        {' '}with the <b>repo</b> scope. Save the generated token for the next step.
+      </li>
+      <li>
+        Deploy <b>stage</b> to your <b>now</b> account using the deploy button below.
+        <div className={styles.center}>
+          <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=ZEIT_TOKEN&env=GITHUB_TOKEN"
+            className={styles.btn}>
+            Deploy to now
+          </a>
+        </div>
+        <i>Note: it will ask for your Zeit API token twice. This is required.</i>
+      </li>
+      <li>Once deployed, copy the url and go to your GitHub repo.</li>
+      <li>On the repo, click 'Settings', then 'Webhooks'. Add a new webhook.</li>
+      <li>
+        Paste the url, and choose 'individual events'.
+        Select the 'Pull Request' event, then add the webhook.
+      </li>
+    </ol>
+
+    <p>That's it! You now have a shiny new <b>stage</b> server waiting to deploy your PRs.</p>
     <Footer />
   </main>
 )
@@ -41,7 +64,10 @@ const styles = {
   h2: style({
     fontSize: '12px',
     fontWeight: 700,
-    marginTop: '50px'
+    marginTop: 35
+  }),
+  ol: style({
+    lineHeight: 2
   }),
   center: style({
     textAlign: 'center'

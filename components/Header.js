@@ -6,7 +6,9 @@ export default ({title}) => (
   <header>
     <Head>
       <title>{title}</title>
+      <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="staging environments made simple and realtime" />
     </Head>
     <h1 className={styles.h1}># STAGE</h1>
   </header>
@@ -39,6 +41,7 @@ insertRule(`
   }
 
   a:hover {
+    cursor: pointer;
     border: none;
   }
 

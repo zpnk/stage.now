@@ -9,7 +9,7 @@ export default () => (
       <a href="https://github.com/zpnk">@zpnk</a>
     </span>
     <span>
-      <a href="https://github.com/zpnk/stage.sh">source</a>
+      <a href="https://github.com/zpnk/stage-ci">source</a>
     </span>
   </footer>
 )
