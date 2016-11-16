@@ -15,7 +15,7 @@ export default () => (
       to <b>QA and ship</b> apps.
     </p>
     <p>
-      By harnessing the power of <b><a href="https://now.sh">now</a></b>,
+      By harnessing the power of <b><a href="https://now.sh">△ now</a></b>,
       deployments are <b>fast</b> and <b>reliable</b>.
     </p>
     <h2 className={styles.h2}>## Instant environments for every PR </h2>
@@ -38,7 +38,7 @@ export default () => (
         {' '}with the <b>repo</b> scope. Save the generated token for the next step.
       </li>
       <li>
-        Deploy <b>stage</b> to your <b>now</b> account using the deploy button below.
+        Deploy <b>stage</b> to your <b><a href="https://now.sh">△ now</a></b> account using the deploy button below.
         <div className={styles.center}>
           <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=ZEIT_TOKEN&env=GITHUB_TOKEN"
             className={styles.btn}>
