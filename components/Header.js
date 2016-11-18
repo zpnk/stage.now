@@ -1,18 +1,6 @@
-import React from 'react'
-import Head from 'next/head'
-import {style, insertRule} from 'next/css'
-
-export default ({title}) => (
-  <header>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="staging environments made simple and realtime" />
-    </Head>
-    <h1 className={styles.h1}># STAGE</h1>
-  </header>
-)
+import React, {PropTypes} from 'react';
+import Head from 'next/head';
+import {style, insertRule} from 'next/css';
 
 insertRule(`
   *, *:before, *:after {
@@ -63,11 +51,29 @@ insertRule(`
     margin: 0 auto;
     padding: 0 15px;
   }
-`)
+`);
 
 const styles = {
   h1: style({
     fontSize: '13px',
     fontWeight: 700
   })
-}
+};
+
+const Header = ({title}) => (
+  <header>
+    <Head>
+      <title>{title}</title>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="staging environments made simple and realtime" />
+    </Head>
+    <h1 className={styles.h1}># STAGE</h1>
+  </header>
+);
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired
+};
+
+export default Header;

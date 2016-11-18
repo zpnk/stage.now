@@ -4,9 +4,65 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "xo"
   },
   "dependencies": {
-    "next": "^1.1.1"
+    "eslint-config-xo-react": "^0.10.0",
+    "eslint-plugin-react": "^6.7.1",
+    "next": "^1.1.1",
+    "xo": "^0.17.1"
+  },
+  "xo": {
+    "extends": "xo-react",
+    "esnext": true,
+    "space": true,
+    "settings": {
+      "import/core-modules": ["react"]
+    },
+    "rules": {
+      "no-warning-comments": "warn",
+      "space-infix-ops": 0,
+      "one-var": ["error", {
+        "uninitialized": "always",
+        "initialized": "never"
+      }],
+      "max-statements-per-line": ["error", {
+        "max": 2
+      }],
+      "brace-style": ["error", "1tbs", {
+        "allowSingleLine": true
+      }],
+      "curly": [
+        "error",
+        "multi",
+        "consistent"
+      ],
+      "quote-props": [
+        "error",
+        "consistent"
+      ],
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "unicorn/catch-error-name": ["error", {
+        "name": "error"
+      }],
+      "unicorn/filename-case": 0,
+      "react/jsx-first-prop-new-line": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "react/jsx-space-before-closing": [
+        "error",
+        "always"
+      ],
+      "react/jsx-no-bind": [
+        "error",
+        {
+          "ignoreRefs": true,
+          "allowArrowFunctions": true
+        }
+      ]
+    }
   }
 }
