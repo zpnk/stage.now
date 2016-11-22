@@ -1,172 +1,158 @@
-import React from 'react';
-import {style} from 'next/css';
+import React, {Component} from 'react';
+import {style, keyframes} from 'next/css';
 import Browser from './Browser';
+import ExampleSite from './ExampleSite';
 
-export default function Hero({
-  branchActive=true,
-  stageActive=true,
-  mainlineActive=true,
-  browserSize={width: 450, height: 313}
-}) {
-  const css = styles({branchActive, stageActive, mainlineActive});
+export default class Hero extends Component {
+  state = {
+    branchActive: false,
+    stageActive: false,
+    mainlineActive: false
+  };
 
-  return (
-    <div className={css.container}>
-      <div className={css.mainline}>
-        <div className={css.mainlineLine} />
-        <div className={css.newCommit} />
-        <div className={css.oldCommit} />
-      </div>
-      <div className={css.branch}>
-        <div className={css.branchMergeLeftLine} />
-        <div className={css.branchMergeUpLine} />
-        <div className={css.stageBrowser} style={browserSize}>
+  static MEDIA_STACKED = '@media(max-width: 1280px)';
+  static MEDIA_FLUID = '@media(max-width: 468px)';
+
+  componentWillMount() {
+    setTimeout(() => this.setState({branchActive: true}), 1000);
+    setTimeout(() => this.setState({stageActive: true}), 2000);
+    setTimeout(() => this.setState({stageReady: true}), 3000);
+    setTimeout(() => this.setState({mainlineActive: true}), 4000);
+  }
+
+  render() {
+    const {branchActive, stageActive, stageReady, mainlineActive} = this.state;
+    const css = styles(this.state);
+
+    return (
+      <div className={css.container}>
+        <div className={css.leftMessage}>
+          <div>red-button 634023f</div>
+          <div><a href="https://github.com/zpnk" target="_blank">@zpnk</a> Change button color to red</div>
+        </div>
+        <div className={css.leftCommit} />
+        <div className={css.leftLine} />
+        <div className={css.stageBrowser}>
           {stageActive && (
-            <Browser {...browserSize} address="https://my-project-red-button.now.sh">
-
+            <Browser address="https://my-project-red-button.now.sh">
+              <ExampleSite />
+              {stageReady && (
+                <div className={css.stageReady} />
+              )}
             </Browser>
           )}
         </div>
-        <div className={css.stageLine} />
-        <div className={css.branchCommit} />
-        <div className={css.branchCommitLabel}>
-          <div>red-button 634023f</div>
-          <div><a href="#">@zpnk</a> Change primary button color</div>
+        <div className={css.rightLine} />
+        <div className={css.rightCommit} />
+        <div className={css.rightMessage}>
+          <div>master fab0f32</div>
+          <div><a href="https://github.com/amccloud" target="_blank">@amccloud</a> Merged: "Change button color to red"</div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
+const bounce = keyframes({
+  '0%': {transform: 'scale(0.1)', opacity: 0},
+  '60%': {transform: 'scale(1.2)', opacity: 1},
+  '100%': {transform: 'scale(1)'}
+});
+
 const styles = ({
-  height=500,
-  width='100%',
-  commitSize=30,
   branchActive,
   stageActive,
+  stageReady,
   mainlineActive
 }) => {
   const commit = {
-    position: 'relative',
-    width: commitSize,
-    height: commitSize,
-    margin: '0px auto',
-    borderRadius: '50%',
-    backgroundColor: 'white',
-    boxShadow: `0 0 0 ${commitSize/2}px`,
-    color: '#eee'
+    flex: '0 0 auto',
+    width: 30,
+    height: 30,
+    border: `${30/2}px solid #eee`,
+    borderRadius: '50%'
   };
 
   const line = {
-    width: commit.width/2,
+    flex: 1,
+    margin: -1, // allows lines to connect without gaps
+    zIndex: -1, // lines should always be below
     height: commit.width/2,
-    margin: '0px auto',
-    backgroundColor: '#eee'
+    width: commit.width/2,
+    backgroundColor: '#eee',
+    [Hero.MEDIA_STACKED]: {
+      minHeight: commit.width*2
+    }
+  };
+
+  const message = {
+    margin: 10,
+    padding: 20,
+    border: '2px solid black',
+    transition: 'opacity 400ms ease-out, transform 200ms ease-out'
   };
 
   return {
     container: style({
-      width,
-      height,
-      display: 'table',
-      tableLayout: 'fixed',
-      position: 'relative',
-      padding: commit.width
-    }),
-    mainline: style({
-      display: 'table-cell',
-      width: line.width/2,
-      position: 'relative',
-      height: '100%',
-      zIndex: 1
-    }),
-    branch: style({
-      position: 'relative',
-      display: 'table-cell',
-      width: 'auto',
-      verticalAlign: 'middle'
-    }),
-    newCommit: style({
-      ...commit,
-      transform: 'translate(-50%, -50%)',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      color: (mainlineActive) ? 'black' : commit.color,
-      backgroundColor: '#3ac547'
-    }),
-    oldCommit: style({
-      ...commit,
-      transform: 'translate(-50%, 50%)',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      color: (mainlineActive) ? 'black' : commit.color
-    }),
-    branchCommit: style({
-      ...commit,
-      transform: 'translate(-50%, 0)',
-      position: 'absolute',
-      left: '50%',
-      bottom: -commit.height/2,
-      color: (branchActive) ? 'black' : commit.color
-    }),
-    mainlineLine: style({
-      ...line,
-      transform: 'translate(-50%, 0)',
-      height: '100%',
-      backgroundColor: (mainlineActive) ? 'black' : line.backgroundColor
-    }),
-    branchMergeLeftLine: style({
-      ...line,
-      position: 'absolute',
-      width: '50%',
-      top: -line.width/2,
-      left: line.width/2,
-      backgroundColor: (mainlineActive) ? 'black' : line.backgroundColor
-    }),
-    branchMergeUpLine: style({
-      ...line,
-      transform: 'translate(-50%, 0)',
-      position: 'absolute',
-      margin: '0px auto',
-      height: '50%',
-      top: 0,
-      left: '50%',
-      backgroundColor: (mainlineActive) ? 'black' : line.backgroundColor
-    }),
-    stageLine: style({
-      ...line,
-      transform: 'translate(-50%, 0)',
-      position: 'absolute',
-      margin: '0px auto',
-      height: '50%',
-      bottom: 0,
-      left: '50%',
-      backgroundColor: (branchActive) ? 'black' : line.backgroundColor
+      display: 'flex',
+      alignItems: 'center',
+      [Hero.MEDIA_STACKED]: {
+        flexDirection: 'column'
+      },
+      [Hero.MEDIA_FLUID]: {
+        padding: 10
+      }
     }),
     stageBrowser: style({
-      position: 'absolute',
-      zIndex: 1,
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+      position: 'relative',
+      width: 448,
+      height: 311,
       borderRadius: 5,
       backgroundColor: (stageActive) ? 'black' : '#eee',
-      color: 'white'
+      color: 'white',
+      [Hero.MEDIA_FLUID]: {
+        width: '100%'
+      }
     }),
-    stageBrowserNav: style({
-      padding: 10,
-      textAlign: 'center',
-      color: 'white'
-    }),
-    branchCommitLabel: style({
-      transform: `translate(${commit.width}px, 50%)`,
-      visibility: (branchActive) ? 'visible' : 'hidden',
+    stageReady: style({
+      animation: `${bounce} 500ms`,
       position: 'absolute',
-      bottom: 0,
-      left: '50%',
-      padding: 20
+      bottom: 20,
+      right: 20,
+      width: 60,
+      height: 60,
+      fontSize: 60,
+      border: '2px solid #3ac547',
+      borderRadius: '50%',
+      backgroundColor: '#3ac547',
+      color: 'black'
+    }),
+    leftCommit: style({
+      ...commit,
+      borderColor: (branchActive) ? 'black' : commit.color
+    }),
+    leftLine: style({
+      ...line,
+      backgroundColor: (branchActive) ? 'black' : line.backgroundColor
+    }),
+    leftMessage: style({
+      ...message,
+      opacity: (branchActive) ? 1 : 0,
+      transform: (branchActive) ? 'scale(1, 1)' : 'scale(0, 0)'
+    }),
+    rightCommit: style({
+      ...commit,
+      backgroundColor: (mainlineActive) ? '#3ac547' : commit.backgroundColor,
+      borderColor: (mainlineActive) ? 'black' : commit.color
+    }),
+    rightLine: style({
+      ...line,
+      backgroundColor: (mainlineActive) ? 'black' : line.backgroundColor
+    }),
+    rightMessage: style({
+      ...message,
+      opacity: (mainlineActive) ? 1 : 0,
+      transform: (mainlineActive) ? 'scale(1, 1)' : 'scale(0, 0)'
     })
   };
 }
