@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {style, keyframes} from 'next/css';
+import FaThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import Browser from './Browser';
 import ExampleSite from './ExampleSite';
 
@@ -32,15 +33,15 @@ export default class Hero extends Component {
         </div>
         <div className={css.leftCommit} />
         <div className={css.leftLine} />
-        <div className={css.stageBrowser}>
-          {stageActive && (
+        <div className={css.stageBrowserContainer}>
+          <div className={css.stageBrowser}>
             <Browser address="https://my-project-red-button.now.sh">
               <ExampleSite />
               {stageReady && (
-                <div className={css.stageReady} />
+                <FaThumbsUp className={css.stageReady} />
               )}
             </Browser>
-          )}
+          </div>
         </div>
         <div className={css.rightLine} />
         <div className={css.rightCommit} />
@@ -103,16 +104,25 @@ const styles = ({
         padding: 10
       }
     }),
-    stageBrowser: style({
+    stageBrowserContainer: style({
       position: 'relative',
       width: 448,
       height: 311,
       borderRadius: 5,
-      backgroundColor: (stageActive) ? 'black' : '#eee',
+      backgroundColor: '#eee',
       color: 'white',
       [Hero.MEDIA_FLUID]: {
         width: '100%'
       }
+    }),
+    stageBrowser: style({
+      transition: 'opacity 400ms ease-out, transform 200ms ease-out',
+      transform: (stageActive) ? 'translateX(0)' : 'translateX(-100px)',
+      opacity: (stageActive) ? 1 : 0,
+      borderRadius: 5,
+      backgroundColor: 'black',
+      width: '100%',
+      height: '100%'
     }),
     stageReady: style({
       animation: `${bounce} 500ms`,
@@ -122,10 +132,7 @@ const styles = ({
       width: 60,
       height: 60,
       fontSize: 60,
-      border: '2px solid #3ac547',
-      borderRadius: '50%',
-      backgroundColor: '#3ac547',
-      color: 'black'
+      color: '#3ac547'
     }),
     leftCommit: style({
       ...commit,
