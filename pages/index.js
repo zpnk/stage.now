@@ -73,7 +73,9 @@ export default () => (
           Deploy <b>stage</b> to your <b><a href="https://now.sh">&#9651; now</a></b> account using the deploy button below.
           <div className={styles.center}>
             <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=GITHUB_TOKEN"
-              className={styles.btn}>
+              className={styles.btn}
+              target="_blank"
+              rel="noopener noreferrer">
               <img src="/static/button.svg" />
             </a>
           </div>
