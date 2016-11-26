@@ -124,28 +124,16 @@ export default class Hero extends Component {
   };
 
   componentDidMount() {
-    this.branchActiveTimeout = setTimeout(() =>
-      this.setState({branchActive: true}
-    ), 1000);
-
-    this.stageActiveTimeout = setTimeout(() =>
-      this.setState({stageActive: true}
-    ), 2000);
-
-    this.stageReadyTimeout = setTimeout(() =>
-      this.setState({stageReady: true}
-    ), 3000);
-
-    this.mainlineActiveTimeout = setTimeout(() =>
-      this.setState({mainlineActive: true}
-    ), 4000);
+    this.timeouts = [
+      setTimeout(() => this.setState({branchActive: true}), 1000),
+      setTimeout(() => this.setState({stageActive: true}), 2000),
+      setTimeout(() => this.setState({stageReady: true}), 3000),
+      setTimeout(() => this.setState({mainlineActive: true}), 4000),
+    ];
   }
 
   componentWillUnmount() {
-    clearTimeout(this.branchActiveTimeout);
-    clearTimeout(this.stageActiveTimeout);
-    clearTimeout(this.stageReadyTimeout);
-    clearTimeout(this.mainlineActiveTimeout);
+    this.timeouts.map((timeout) => clearTimeout(timeout));
   }
 
   render() {
