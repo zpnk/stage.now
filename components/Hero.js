@@ -4,55 +4,8 @@ import FaThumbsUp from 'react-icons/lib/fa/thumbs-up';
 import Browser from './Browser';
 import ExampleSite from './ExampleSite';
 
-export default class Hero extends Component {
-  state = {
-    branchActive: false,
-    stageActive: false,
-    mainlineActive: false
-  };
-
-  static MEDIA_STACKED = '@media(max-width: 1280px)';
-  static MEDIA_FLUID = '@media(max-width: 468px)';
-
-  componentWillMount() {
-    setTimeout(() => this.setState({branchActive: true}), 1000);
-    setTimeout(() => this.setState({stageActive: true}), 2000);
-    setTimeout(() => this.setState({stageReady: true}), 3000);
-    setTimeout(() => this.setState({mainlineActive: true}), 4000);
-  }
-
-  render() {
-    const {branchActive, stageActive, stageReady, mainlineActive} = this.state;
-    const css = styles(this.state);
-
-    return (
-      <div className={css.container}>
-        <div className={css.leftMessage}>
-          <div>red-button 634023f</div>
-          <div><a href="https://github.com/zpnk" target="_blank">@zpnk</a> Change button color to red</div>
-        </div>
-        <div className={css.leftCommit} />
-        <div className={css.leftLine} />
-        <div className={css.stageBrowserContainer}>
-          <div className={css.stageBrowser}>
-            <Browser address="https://my-project-red-button.now.sh">
-              <ExampleSite />
-              {stageReady && (
-                <FaThumbsUp className={css.stageReady} />
-              )}
-            </Browser>
-          </div>
-        </div>
-        <div className={css.rightLine} />
-        <div className={css.rightCommit} />
-        <div className={css.rightMessage}>
-          <div>master fab0f32</div>
-          <div><a href="https://github.com/amccloud" target="_blank">@amccloud</a> Merged: "Change button color to red"</div>
-        </div>
-      </div>
-    );
-  }
-}
+const MEDIA_STACKED = '@media(max-width: 1280px)';
+const MEDIA_FLUID = '@media(max-width: 468px)';
 
 const bounce = keyframes({
   '0%': {transform: 'scale(0.1)', opacity: 0},
@@ -63,7 +16,6 @@ const bounce = keyframes({
 const styles = ({
   branchActive,
   stageActive,
-  stageReady,
   mainlineActive
 }) => {
   const commit = {
@@ -81,7 +33,7 @@ const styles = ({
     height: commit.width/2,
     width: commit.width/2,
     backgroundColor: '#eee',
-    [Hero.MEDIA_STACKED]: {
+    [MEDIA_STACKED]: {
       minHeight: commit.width*2
     }
   };
@@ -97,10 +49,10 @@ const styles = ({
     container: style({
       display: 'flex',
       alignItems: 'center',
-      [Hero.MEDIA_STACKED]: {
+      [MEDIA_STACKED]: {
         flexDirection: 'column'
       },
-      [Hero.MEDIA_FLUID]: {
+      [MEDIA_FLUID]: {
         padding: 10
       }
     }),
@@ -111,7 +63,7 @@ const styles = ({
       borderRadius: 5,
       backgroundColor: '#eee',
       color: 'white',
-      [Hero.MEDIA_FLUID]: {
+      [MEDIA_FLUID]: {
         width: '100%'
       }
     }),
@@ -162,4 +114,51 @@ const styles = ({
       transform: (mainlineActive) ? 'scale(1, 1)' : 'scale(0, 0)'
     })
   };
+};
+
+export default class Hero extends Component {
+  state = {
+    branchActive: false,
+    stageActive: false,
+    mainlineActive: false
+  };
+
+  componentDidMount() {
+    setTimeout(() => this.setState({branchActive: true}), 1000);
+    setTimeout(() => this.setState({stageActive: true}), 2000);
+    setTimeout(() => this.setState({stageReady: true}), 3000);
+    setTimeout(() => this.setState({mainlineActive: true}), 4000);
+  }
+
+  render() {
+    const {stageReady} = this.state;
+    const css = styles(this.state);
+
+    return (
+      <div className={css.container}>
+        <div className={css.leftMessage}>
+          <div>red-button 634023f</div>
+          <div><a href="https://github.com/zpnk" target="_blank" rel="noopener noreferrer">@zpnk</a> Change button color to red</div>
+        </div>
+        <div className={css.leftCommit} />
+        <div className={css.leftLine} />
+        <div className={css.stageBrowserContainer}>
+          <div className={css.stageBrowser}>
+            <Browser address="https://my-project-red-button.now.sh">
+              <ExampleSite />
+              {stageReady && (
+                <FaThumbsUp {...css.stageReady} />
+              )}
+            </Browser>
+          </div>
+        </div>
+        <div className={css.rightLine} />
+        <div className={css.rightCommit} />
+        <div className={css.rightMessage}>
+          <div>master fab0f32</div>
+          <div><a href="https://github.com/amccloud" target="_blank" rel="noopener noreferrer">@amccloud</a> Merged: &ldquo;Change button color to red&rdquo;</div>
+        </div>
+      </div>
+    );
+  }
 }

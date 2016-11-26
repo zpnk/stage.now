@@ -2,7 +2,7 @@ import React from 'react';
 import {style} from 'next/css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Hero from '../components/Hero'
+import Hero from '../components/Hero';
 
 const styles = {
   heroContainer: style({

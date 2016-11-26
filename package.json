@@ -12,14 +12,19 @@
     "react-icons": "^2.2.1"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-react": "^6.7.1",
     "xo": "^0.17.1"
   },
   "xo": {
+    "parser": "babel-eslint",
     "extends": "xo-react",
     "esnext": true,
     "space": true,
+    "settings": {
+      "import/core-modules": ["react"]
+    },
     "rules": {
       "no-warning-comments": "warn",
       "space-infix-ops": 0,

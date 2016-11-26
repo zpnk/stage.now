@@ -1,25 +1,5 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {style} from 'next/css';
-
-export default function Browser({address='https://example.com', children}) {
-  return (
-    <div className={styles.container}>
-      <div className={styles.navigation}>
-        <div className={styles.controls}>
-          <div className={styles.closeControl} />
-          <div className={styles.minimizeControl} />
-          <div className={styles.maximizeControl} />
-        </div>
-        <div className={styles.address}>
-          {address}
-        </div>
-      </div>
-      <div className={styles.content}>
-        {children}
-      </div>
-    </div>
-  );
-}
 
 const control = {
   display: 'inline-block',
@@ -54,4 +34,31 @@ const styles = {
   address: style({
     fontSize: 12
   })
+};
+
+function Browser({address='https://example.com', children}) {
+  return (
+    <div className={styles.container}>
+      <div className={styles.navigation}>
+        <div className={styles.controls}>
+          <div className={styles.closeControl} />
+          <div className={styles.minimizeControl} />
+          <div className={styles.maximizeControl} />
+        </div>
+        <div className={styles.address}>
+          {address}
+        </div>
+      </div>
+      <div className={styles.content}>
+        {children}
+      </div>
+    </div>
+  );
 }
+
+Browser.propTypes = {
+  address: PropTypes.string,
+  children: PropTypes.node
+};
+
+export default Browser;

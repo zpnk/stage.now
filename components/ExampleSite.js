@@ -1,33 +1,5 @@
 import React, {Component} from 'react';
 import {style} from 'next/css';
-import Browser from './Browser';
-
-export default class ExampleSite extends Component {
-  state = {
-    showSite: false
-  };
-
-  componentWillMount() {
-    setTimeout(() => this.setState({showSite: true}), 0);
-  }
-
-  render() {
-    const css = styles(this.state);
-
-    return (
-      <div className={css.fakeContainer}>
-        <div className={css.fakeRow1} />
-        <div className={css.fakeRow2} />
-        <div className={css.fakeRow3} />
-        <div className={css.fakeRow3} />
-        <div className={css.fakeButtons}>
-          <div className={css.fakeButton1} />
-          <div className={css.fakeButton2} />
-        </div>
-      </div>
-    );
-  }
-}
 
 const styles = ({showSite}) => {
   return {
@@ -78,3 +50,30 @@ const styles = ({showSite}) => {
     })
   };
 };
+
+export default class ExampleSite extends Component {
+  state = {
+    showSite: false
+  };
+
+  componentDidMount() {
+    setTimeout(() => this.setState({showSite: true}), 0);
+  }
+
+  render() {
+    const css = styles(this.state);
+
+    return (
+      <div className={css.fakeContainer}>
+        <div className={css.fakeRow1} />
+        <div className={css.fakeRow2} />
+        <div className={css.fakeRow3} />
+        <div className={css.fakeRow3} />
+        <div className={css.fakeButtons}>
+          <div className={css.fakeButton1} />
+          <div className={css.fakeButton2} />
+        </div>
+      </div>
+    );
+  }
+}
