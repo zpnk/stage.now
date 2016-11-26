@@ -22,26 +22,10 @@ const styles = {
     textAlign: 'center'
   }),
   btn: style({
-    'background': '#fff',
-    'border': '2px solid #000',
-    'color': '#000',
-    'cursor': 'pointer',
-    'fontFamily': 'Menlo, Monaco, Lucida Console, Courier New, monospace, serif',
-    'fontSize': '12px',
-    'fontWeight': 700,
-    'textTransform': 'uppercase',
-    'textDecoration': 'none',
-    'lineHeight': 1,
-    'padding': '10px 15px',
-    'margin': '20px 0',
-    'display': 'inline-block',
-    'WebkitTransition': 'all .2s ease',
-    'transition': 'all .2s ease',
-    ':hover': {
-      background: '#000',
-      border: '2px solid #000',
-      color: '#fff'
-    }
+    display: 'inline-block',
+    lineHeight: 1,
+    margin: '20px 0',
+    border: 'none'
   }),
   tagline: style({
     marginBottom: '20px'
@@ -88,12 +72,11 @@ export default () => (
         <li>
           Deploy <b>stage</b> to your <b><a href="https://now.sh">&#9651; now</a></b> account using the deploy button below.
           <div className={styles.center}>
-            <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=ZEIT_TOKEN&env=GITHUB_TOKEN"
+            <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=GITHUB_TOKEN"
               className={styles.btn}>
-              Deploy to now
+              <img src="/static/button.svg" />
             </a>
           </div>
-          <i>Note: it will ask for your Zeit API token twice. This is required.</i>
         </li>
         <li>Once deployed, copy the url and go to your GitHub repo.</li>
         <li>On the repo, click &lsquo;Settings&rsquo;, then &lsquo;Webhooks&rsquo;. Add a new webhook.</li>

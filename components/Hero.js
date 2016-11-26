@@ -128,7 +128,7 @@ export default class Hero extends Component {
       setTimeout(() => this.setState({branchActive: true}), 1000),
       setTimeout(() => this.setState({stageActive: true}), 2000),
       setTimeout(() => this.setState({stageReady: true}), 3000),
-      setTimeout(() => this.setState({mainlineActive: true}), 4000),
+      setTimeout(() => this.setState({mainlineActive: true}), 4000)
     ];
   }
 
