@@ -57,7 +57,13 @@ export default class ExampleSite extends Component {
   };
 
   componentDidMount() {
-    setTimeout(() => this.setState({showSite: true}), 0);
+    this.showSiteTimeout = setTimeout(() =>
+      this.setState({showSite: true}
+    ), 0);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.showSiteTimeout);
   }
 
   render() {
