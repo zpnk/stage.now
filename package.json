@@ -5,7 +5,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "xo"
+    "test": "xo",
+    "precommit": "npm test -s"
   },
   "dependencies": {
     "next": "^1.1.1",
@@ -15,6 +16,7 @@
     "babel-eslint": "^7.1.1",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-react": "^6.7.1",
+    "husky": "^0.11.9",
     "xo": "^0.17.1"
   },
   "xo": {
@@ -23,7 +25,9 @@
     "esnext": true,
     "space": true,
     "settings": {
-      "import/core-modules": ["react"]
+      "import/core-modules": [
+        "react"
+      ]
     },
     "rules": {
       "no-warning-comments": "warn",
