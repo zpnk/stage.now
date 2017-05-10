@@ -1,6 +1,7 @@
 {
   "name": "stage.now",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
