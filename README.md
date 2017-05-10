@@ -1,8 +1,8 @@
-# stage.sh
+# stage.now
 
 > Realtime staging environments.
 
-This is the app that powers [stage.sh](https://stage.sh).
+This is the app that powers [stage.now.sh](https://stage.now.sh).
 
 ## Development
 
