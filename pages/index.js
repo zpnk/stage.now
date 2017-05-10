@@ -82,6 +82,7 @@ export default () => (
         </li>
         <li>Once deployed, copy the url and go to your GitHub repo.</li>
         <li>On the repo, click &lsquo;Settings&rsquo;, then &lsquo;Webhooks&rsquo;. Add a new webhook.</li>
+        <li>Set the Content type dropdown to application/json</li>
         <li>
           Paste the url, and choose &lsquo;individual events&rsquo;.
           Select the &lsquo;Pull Request&rsquo; event, then add the webhook.
