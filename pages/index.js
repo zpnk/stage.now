@@ -67,12 +67,15 @@ export default () => (
       <ol className={styles.ol}>
         <li>
           Create a new <a href="https://github.com/settings/tokens/new">GitHub access token</a>
-          {' '}with the <b>repo</b> scope. Save the generated token for the next step.
+          {' '}with the <b>repo</b> scope. In the following steps this will be called GITHUB_TOKEN.
+        </li>
+        <li>
+          Make up a very long secret security key. In the following steps this will be called GITHUB_WEBHOOK_SECRET.
         </li>
         <li>
           Deploy <b>stage</b> to your <b><a href="https://now.sh">&#9651; now</a></b> account using the deploy button below.
           <div className={styles.center}>
-            <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=GITHUB_TOKEN"
+            <a href="https://deploy.now.sh?repo=https://github.com/zpnk/stage-ci&env=GITHUB_TOKEN&env=GITHUB_WEBHOOK_SECRET"
               className={styles.btn}
               target="_blank"
               rel="noopener noreferrer">
@@ -83,6 +86,7 @@ export default () => (
         <li>Once deployed, copy the url and go to your GitHub repo.</li>
         <li>On the repo, click &lsquo;Settings&rsquo;, then &lsquo;Webhooks&rsquo;. Add a new webhook.</li>
         <li>Set the Content type dropdown to application/json</li>
+        <li>Set the secret to match your made up GITHUB_WEBHOOK_SECRET from above.</li>
         <li>
           Paste the url, and choose &lsquo;individual events&rsquo;.
           Select the &lsquo;Pull Request&rsquo; event, then add the webhook.
