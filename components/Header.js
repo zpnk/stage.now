@@ -66,7 +66,7 @@ const Header = ({title}) => (
       <title>{title}</title>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="staging environments made simple and realtime" />
+      <meta name="description" content="Automatic deploy previews for your PRs" />
       <link rel="shortcut icon" href="/static/favicon.ico" />
     </Head>
     <h1 className={styles.h1}># STAGE</h1>

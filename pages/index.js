@@ -38,7 +38,7 @@ export default () => (
       <Hero />
     </div>
     <main>
-      <Header title="STAGE" />
+      <Header title="Stage: automatic deploy previews for your PRs" />
       <p className={styles.tagline}>
         &gt; staging environments made <b>simple</b> and <b>realtime</b>.
       </p>
