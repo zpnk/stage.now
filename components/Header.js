@@ -67,6 +67,7 @@ const Header = ({title}) => (
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="staging environments made simple and realtime" />
+      <link rel="shortcut icon" href="/static/favicon.ico" />
     </Head>
     <h1 className={styles.h1}># STAGE</h1>
   </header>
